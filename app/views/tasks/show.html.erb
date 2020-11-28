@@ -2,9 +2,18 @@
 <% if @task.is_complete %>
     <button disabled>Done</button>
         <% else %>
-    <button>Complete</button>
+    <%= link_to(
+        'Complete',
+        complete_task_path(@task)
+        
+        
+    ) %>
 <%end%>
 <div>
+    <%= link_to(
+         "Edit",
+         edit_task_path(@task),
+      )  %>
     <%= link_to(
            "Delete", 
            task_path(@task),

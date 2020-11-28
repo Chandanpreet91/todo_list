@@ -28,6 +28,30 @@ class TasksController < ApplicationController
         @task.destroy
         redirect_to tasks_path 
     end
-   
+    def edit 
+        id = params[:id]
+        @task = Task.find(id)
+    end
 
+    def update
+        id = params[:id]
+        @task = Task.find(id)
+        if @task.update(params.require(:task).permit(:title))
+            @task.update_attribute(:is_complete, false)
+            redirect_to task_path(@task)
+        else
+            render :edit 
+        end
+    end
+    def complete_task
+        id = params[:id]
+        @task = Task.find(id)
+        if @task.update_attribute(:is_complete, true)
+            redirect_to task_path(@task)
+        else
+            render :show
+        end
+    end
+
+    
 end
