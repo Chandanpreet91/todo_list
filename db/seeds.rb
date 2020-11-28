@@ -5,3 +5,19 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+    Task.delete_all
+    NUM_OF_TASKS = 10
+
+    NUM_OF_TASKS.times do 
+        created_at = Faker::Date.backward(days: 365 * 5)
+            Task.create(
+                title: Faker::Hacker.say_something_smart,
+                created_at: created_at,
+                updated_at: created_at
+            )
+    end
+
+    task = Task.all 
+
+    puts Cowsay.say("Generated #{task.count} tasks", :bunny)
