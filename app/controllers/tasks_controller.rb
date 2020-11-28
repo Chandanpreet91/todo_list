@@ -44,13 +44,15 @@ class TasksController < ApplicationController
         end
     end
     def complete_task
-        id = params[:id]
-        @task = Task.find(id)
-        if @task.update_attribute(:is_complete, true)
+            id = params[:id]
+            @task = Task.find(id)
+            is_complete_val = @task.is_complete ? false :true
+            if @task.update_attribute(:is_complete,is_complete_val)
             redirect_to task_path(@task)
         else
             render :show
         end
+
     end
 
     
