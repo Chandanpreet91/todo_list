@@ -7,7 +7,27 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
     Task.delete_all
+    User.delete_all
+
     NUM_OF_TASKS = 10
+    NUM_OF_USERS = 5
+    PASSWORD = 'supersecret'
+
+    super_user = User.create(
+        first_name: "Chandanpreet",
+        last_name: 'Kaur',
+        email: "ck@app.com",
+        password: PASSWORD
+    )
+    NUM_OF_USERS.times do
+        
+        User.create(
+            first_name:Faker::Name.first_name,
+            last_name: Faker::Name.last_name,
+            email: Faker::Internet.email,
+            password: PASSWORD
+        )
+    end
 
     NUM_OF_TASKS.times do 
         created_at = Faker::Date.backward(days: 365 * 5)
@@ -18,6 +38,8 @@
             )
     end
 
-    task = Task.all 
+    tasks = Task.all 
+    users = User.all 
 
-    puts Cowsay.say("Generated #{task.count} tasks", :bunny)
+    puts Cowsay.say("Generated #{tasks.count} tasks", :bunny)
+    puts Cowsay.say("Generated #{users.count} users", :sheep)
