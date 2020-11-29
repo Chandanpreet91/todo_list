@@ -5,4 +5,6 @@ Rails.application.routes.draw do
 
   resources :tasks
   get '/complete_task/:id/', to: "tasks#complete_task", as: :complete_task
+
+  resource :session, only: [:new, :create]
 end
